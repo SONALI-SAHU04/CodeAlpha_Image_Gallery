@@ -70,7 +70,7 @@ Image-Gallery/
 │
 └── README.md
 
-✨ Features Explained
+# ✨ Features Explained
 🔍 Search Categories
 
 Users can search gallery categories instantly.
