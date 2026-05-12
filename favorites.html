@@ -1,0 +1,154 @@
+<!-- favorites.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0">
+
+  <title>Favorites Gallery</title>
+
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+  <!-- HERO SECTION -->
+
+  <section class="hero">
+
+    <h1>Favorites Gallery</h1>
+
+    <a href="index.html" class="nav-btn">
+      ← Back to Home
+    </a>
+
+  </section>
+
+  <!-- FAVORITES GALLERY -->
+
+  <div
+  class="gallery"
+  id="favoritesGallery">
+
+  </div>
+
+  <!-- LIGHTBOX -->
+
+  <div
+  class="lightbox"
+  id="lightbox">
+
+    <span class="close">
+      &times;
+    </span>
+
+    <img
+    class="lightbox-img"
+    id="lightbox-img"
+    >
+
+  </div>
+
+  <script>
+
+    const favoritesGallery =
+    document.getElementById(
+      'favoritesGallery'
+    );
+
+    const lightbox =
+    document.getElementById(
+      'lightbox'
+    );
+
+    const lightboxImg =
+    document.getElementById(
+      'lightbox-img'
+    );
+
+    const closeBtn =
+    document.querySelector(
+      '.close'
+    );
+
+    /* GET FAVORITES */
+
+    const favoriteImages =
+    JSON.parse(
+      localStorage.getItem(
+        'favorites'
+      )
+    ) || [];
+
+    /* EMPTY FAVORITES */
+
+    if(favoriteImages.length===0){
+
+      favoritesGallery.innerHTML =
+      `
+      <h2
+      style="
+      text-align:center;
+      width:100%;
+      margin-top:50px;
+      font-size:35px;
+      color:white;
+      ">
+      No Favorite Images Yet ❤️
+      </h2>
+      `;
+    }
+
+    /* DISPLAY FAVORITES */
+
+    favoriteImages.forEach(src=>{
+
+      const img =
+      document.createElement('img');
+
+      img.src=src;
+
+      favoritesGallery
+      .appendChild(img);
+
+      /* OPEN LIGHTBOX */
+
+      img.addEventListener(
+        'click',
+        ()=>{
+
+          lightbox.style.display='flex';
+
+          lightboxImg.src=src;
+        }
+      );
+    });
+
+    /* CLOSE LIGHTBOX */
+
+    closeBtn.onclick=()=>{
+
+      lightbox.style.display='none';
+    };
+
+    /* CLOSE OUTSIDE */
+
+    lightbox.onclick=(e)=>{
+
+      if(e.target===lightbox){
+
+        lightbox.style.display='none';
+      }
+    };
+
+  </script>
+
+</body>
+</html>
